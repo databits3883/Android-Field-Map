@@ -1,13 +1,16 @@
 package com.deadman.strat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
+  public static Drawable background;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +23,6 @@ public class MainActivity extends Activity {
 
     setContentView(R.layout.main);
 
-    View mv = findViewById(R.id.canvas_view);
-    mv.setDrawingCacheEnabled(true);
-    mv.setBackgroundResource(R.drawable.field);
-
     Button red_button = findViewById(R.id.red_button);
     red_button.setOnClickListener(v -> red());
 
@@ -35,6 +34,10 @@ public class MainActivity extends Activity {
 
     Button clear_button = findViewById(R.id.clear_button);
     clear_button.setOnClickListener(v -> clear());
+
+    Button settings_button = findViewById(R.id.settings_button);
+    settings_button.setOnClickListener(v -> settings());
+
   }
 
   @Override
@@ -44,6 +47,21 @@ public class MainActivity extends Activity {
     View decorView = getWindow().getDecorView();
     int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
     decorView.setSystemUiVisibility(uiOptions);
+
+    View mv = findViewById(R.id.canvas_view);
+    mv.setDrawingCacheEnabled(true);
+    if (background == null){
+      Drawable field = getDrawable(R.drawable.field);
+      mv.setBackground(field);
+    } else {
+      mv.setBackground(background);
+    }
+
+  }
+
+  private void settings() {
+    Intent intent = new Intent(this, Settings.class);
+    startActivity(intent);
   }
 
   private void red(){
