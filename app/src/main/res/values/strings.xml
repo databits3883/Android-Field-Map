@@ -7,4 +7,6 @@
     <string name="settings">Settings</string>
     <string name="choose_image">Choose Image</string>
     <string name="choose_image_title">Select your own background image</string>
+  <string name="back">Back</string>
+  <string name="back_title">Go back to map</string>
 </resources>

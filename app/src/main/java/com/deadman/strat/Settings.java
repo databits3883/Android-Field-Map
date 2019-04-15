@@ -7,12 +7,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.features.ReturnMode;
 import com.esafirm.imagepicker.model.Image;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Settings extends Activity {
 
@@ -60,8 +67,34 @@ public class Settings extends Activity {
       Image image = ImagePicker.getFirstImageOrNull(data);
       Bitmap bmp = BitmapFactory.decodeFile(image.getPath());
       MainActivity.background = new BitmapDrawable(getResources(), bmp);
+
+      String imgpath = image.getPath();
+      File map_background = new File(
+          Environment.getExternalStorageDirectory() + File.separator + "FRC" + File.separator + "map_background.txt");
+      try {
+        FileOutputStream stream = new FileOutputStream(map_background);
+        stream.write(imgpath.getBytes());
+        stream.close();
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      rescan(map_background.getAbsolutePath());
+
       back();
     }
     super.onActivityResult(requestCode, resultCode, data);
   }
+
+  // Function to scan the edited file so it shows up right away in MTP/OTG
+  public void rescan(String file) {
+    MediaScannerConnection.scanFile(this,
+        new String[]{file}, null,
+        (path, uri) -> {
+          Log.i("ExternalStorage", "Scanned " + path + ":");
+          Log.i("ExternalStorage", "-> uri=" + uri);
+        });
+  }
+
 }
