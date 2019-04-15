@@ -65,6 +65,9 @@ public class MainActivity extends Activity {
     if (background == null & !map_background.exists()) {
       Drawable field = getDrawable(R.drawable.field);
       mv.setBackground(field);
+    } else if (!map_background.exists()) {
+      Drawable field = getDrawable(R.drawable.field);
+      mv.setBackground(field);
     } else if (map_background.exists()) {
       int length = (int) map_background.length();
 

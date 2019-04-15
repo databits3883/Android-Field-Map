@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,6 +21,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Settings extends Activity {
+
+  File FRC = new File(Environment.getExternalStorageDirectory() + File.separator + "FRC");
+  File map_background = new File(
+      Environment.getExternalStorageDirectory() + File.separator + "FRC" + File.separator + "map_background.txt");
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,14 @@ public class Settings extends Activity {
 
     Button select = findViewById(R.id.select_button);
     select.setOnClickListener(v -> selector());
+
+    Button cache = findViewById(R.id.remove_cache_button);
+    cache.setOnClickListener(v -> remove_cache());
+
+    if (!FRC.exists()) {
+      FRC.mkdirs();
+    }
+    rescan(FRC.getAbsolutePath());
 
   }
 
@@ -69,8 +80,6 @@ public class Settings extends Activity {
       MainActivity.background = new BitmapDrawable(getResources(), bmp);
 
       String imgpath = image.getPath();
-      File map_background = new File(
-          Environment.getExternalStorageDirectory() + File.separator + "FRC" + File.separator + "map_background.txt");
       try {
         FileOutputStream stream = new FileOutputStream(map_background);
         stream.write(imgpath.getBytes());
@@ -87,8 +96,14 @@ public class Settings extends Activity {
     super.onActivityResult(requestCode, resultCode, data);
   }
 
+  private void remove_cache(){
+    map_background.delete();
+    rescan(FRC.getAbsolutePath());
+    back();
+  }
+
   // Function to scan the edited file so it shows up right away in MTP/OTG
-  public void rescan(String file) {
+  private void rescan(String file) {
     MediaScannerConnection.scanFile(this,
         new String[]{file}, null,
         (path, uri) -> {

@@ -9,4 +9,6 @@
     <string name="choose_image_title">Select your own background image</string>
   <string name="back">Back</string>
   <string name="back_title">Go back to map</string>
+  <string name="remove_cache_button">Remove cached image</string>
+  <string name="remove_cache_title">Return to default background</string>
 </resources>

@@ -11,14 +11,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginStart="8dp"
+    android:layout_marginStart="9dp"
     android:layout_marginEnd="8dp"
     android:text="@string/choose_image"
-    app:layout_constraintBottom_toTopOf="@+id/guideline10"
     app:layout_constraintEnd_toStartOf="@+id/guideline8"
     app:layout_constraintStart_toStartOf="@+id/guideline9"
-    app:layout_constraintTop_toTopOf="@+id/guideline7"/>
+    app:layout_constraintTop_toTopOf="@+id/guideline11"/>
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline7"
     android:layout_width="wrap_content"
@@ -47,36 +45,75 @@
     android:orientation="horizontal"
     app:layout_constraintGuide_begin="20dp"
     app:layout_constraintGuide_percent="0.70"/>
-  <TextView
-    android:id="@+id/select_own"
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline11"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_begin="20dp"
+    app:layout_constraintGuide_percent="0.20"/>
+
+  <TextView
+    android:id="@+id/select_own"
+    android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
     android:text="@string/choose_image_title"
-    app:layout_constraintBottom_toTopOf="@+id/guideline7"
+    android:textColor="@android:color/black"
+    android:textSize="24sp"
+    app:layout_constraintBottom_toTopOf="@+id/guideline11"
     app:layout_constraintEnd_toStartOf="@+id/guideline8"
-    app:layout_constraintStart_toStartOf="@+id/guideline9"/>
+    app:layout_constraintStart_toStartOf="@+id/guideline9"
+    />
   <Button
     android:id="@+id/back_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
+    android:layout_marginTop="16dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
     android:text="@string/back"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/guideline8"
-    app:layout_constraintStart_toStartOf="@+id/guideline9"/>
+    app:layout_constraintStart_toStartOf="@+id/guideline9"
+    app:layout_constraintTop_toTopOf="@+id/guideline10"/>
   <TextView
     android:id="@+id/back_text"
+    android:textStyle="bold"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
     android:text="@string/back_title"
+    android:textColor="@android:color/black"
+    android:textSize="24sp"
     app:layout_constraintBottom_toTopOf="@+id/back_button"
     app:layout_constraintEnd_toStartOf="@+id/guideline8"
     app:layout_constraintStart_toStartOf="@+id/guideline9"
     app:layout_constraintTop_toTopOf="@+id/guideline10"/>
+  <Button
+    android:id="@+id/remove_cache_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/remove_cache_button"
+    app:layout_constraintEnd_toStartOf="@+id/guideline8"
+    app:layout_constraintStart_toStartOf="@+id/guideline9"
+    app:layout_constraintTop_toTopOf="@+id/guideline7"/>
+  <TextView
+    android:id="@+id/remove_cache_title"
+    android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:text="@string/remove_cache_title"
+    android:textAlignment="textStart"
+    android:textColor="@android:color/black"
+    android:textSize="24sp"
+    app:layout_constraintBottom_toTopOf="@+id/guideline7"
+    app:layout_constraintEnd_toStartOf="@+id/guideline8"
+    app:layout_constraintStart_toStartOf="@+id/guideline9"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
